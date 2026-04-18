@@ -19,6 +19,20 @@ archives:
   - formats: [binary]
     name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 
+checksum:
+  name_template: "checksums.txt"
+
+signs:
+  - cmd: cosign
+    signature: "${artifact}.sigstore.json"
+    args:
+      - sign-blob
+      - "--bundle=${signature}"
+      - "${artifact}"
+      - "--yes"
+    artifacts: checksum
+    output: true
+
 kos:
   - repositories:
       - "ghcr.io/darkness4/hath-exchange-exporter"
@@ -59,8 +73,7 @@ kos:
     local_domain: "hath-exchange-exporter"
 
 docker_signs:
-  - artifacts: all
-
+  - output: true
     args:
       - sign
       - "${artifact}"
