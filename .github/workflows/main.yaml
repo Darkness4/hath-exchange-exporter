@@ -10,7 +10,6 @@ on:
 
 jobs:
   lint:
-    name: Lint withny-dl
     runs-on: ubuntu-latest
 
     steps:
