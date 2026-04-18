@@ -59,14 +59,10 @@ kos:
     local_domain: "hath-exchange-exporter"
 
 docker_signs:
-  - artifacts: manifests
+  - artifacts: all
 
     args:
       - sign
-      - --key=cosign.key
-
-      # Explicitely set the artifact name, instead of the default "${artifact}@${digest}"
-      # because ko give already the digest in the artifact name.
       - "${artifact}"
       - "--yes"
 
