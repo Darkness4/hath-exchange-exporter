@@ -1,0 +1,10 @@
+# Netscape HTTP Cookie File
+# https://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file! Do not edit.
+
+.e-hentai.org	TRUE	/	FALSE	1805762067	ipb_member_id	1234
+.e-hentai.org	TRUE	/	FALSE	1805762067	ipb_pass_hash	1234
+.e-hentai.org	TRUE	/	FALSE	1805762069	sk	1234
+.e-hentai.org	TRUE	/	FALSE	1805762069	hath_perks	m1.m2.m3.a.s-aaac
+.e-hentai.org	TRUE	/	FALSE	0	ipb_session_id	123
+.e-hentai.org	TRUE	/	TRUE	1805762067	cf_clearance	abc

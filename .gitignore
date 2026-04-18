@@ -1,0 +1,12 @@
+.vscode/
+dist/
+
+# Coverage CI artifacts
+coverage/
+coverage-sources.zip
+
+# Cosign CI secrets
+cosign.pub
+cosign.key
+
+cookies.txt

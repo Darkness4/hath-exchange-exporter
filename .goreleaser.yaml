@@ -1,0 +1,85 @@
+version: 2
+
+project_name: hath-exchange-exporter
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+    main: ./cmd/exporter
+
+archives:
+  - formats: [binary]
+    name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
+
+kos:
+  - repositories:
+      - 'ghcr.io/Darkness4/hath-exchange-exporter'
+
+    base_image: 'chainguard/static:latest'
+
+    tags:
+      - 'latest'
+      - 'v{{ .Version }}'
+      - 'v{{ .Major }}'
+      - 'v{{ .Major }}.{{ .Minor }}'
+      - 'v{{ .Major }}.{{ .Minor }}.{{ .Patch }}'
+
+    labels:
+      'org.opencontainers.image.created': '{{.Date}}'
+      'org.opencontainers.image.title': '{{.ProjectName}}'
+      'org.opencontainers.image.description': 'Token generator for impersonation and embeds.'
+      'org.opencontainers.image.revision': '{{.FullCommit}}'
+      'org.opencontainers.image.version': '{{.Version}}'
+      'org.opencontainers.image.url': 'https://github.com/Darkness4/hath-exchange-exporter'
+      'org.opencontainers.image.source': 'https://github.com/Darkness4/hath-exchange-exporter'
+
+    platforms:
+      - linux/amd64
+      - linux/arm64
+
+    # Don't add package path to image path
+    bare: true
+    preserve_import_paths: false
+
+    # Run during snapshot too.
+    disable: false
+
+    sbom: spdx
+    sbom_directory: 'dist/sbom'
+
+    # When snapshotting, store as docker.io/library/<local_domain>
+    local_domain: 'hath-exchange-exporter'
+
+docker_signs:
+  - artifacts: manifests
+
+    args:
+      - sign
+      - --key=cosign.key
+
+      # Explicitely set the artifact name, instead of the default "${artifact}@${digest}"
+      # because ko give already the digest in the artifact name.
+      - '${artifact}'
+      - '--yes'
+
+release:
+  github:
+    owner: 'Darkness4'
+    name: 'hath-exchange-exporter'
+  draft: false
+  prerelease: auto
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
