@@ -16,5 +16,4 @@
     },
   ],
   rebaseWhen: "conflicted",
-  commitMessagePrefix: "chore({{parentDir}}):",
 }
