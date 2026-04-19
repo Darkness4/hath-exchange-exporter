@@ -8,6 +8,12 @@ Yes, it is vibe-coded, and no I won't explain it.
 
 The implementation is simple and I'm lazy.
 
+## Grafana Dashboard
+
+![Grafana Dashboard](README.assets/grafana_dashboard.png)
+
+![Grafana Dashboard 2](README.assets/grafana_dashboard_2.png)
+
 ## Usage
 
 Just run it on linux. Access on port 9101, path /metrics.
